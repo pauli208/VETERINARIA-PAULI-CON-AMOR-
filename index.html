@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Veterinaria Paulina con Amor</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(#ffe6f0, #fff);
+      color: #d63384;
+      padding: 20px;
+      background-image: url('https://i.pinimg.com/originals/d4/0d/10/d40d1087ed1db37b73a8437b1187ed63.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: #ff69b4;
+      text-shadow: 1px 1px #fff;
+    }
+
+    form {
+      background: #fff0f5;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #ffc0cb;
+      max-width: 500px;
+      margin: 0 auto 20px auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 2px solid #ffb6c1;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: #fff0f5;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #ffc0cb;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ffb6c1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐾 Paulina con Amor 🐾</h1>
+
+  <form id="formulario">
+    <label for="nombreMascota">Nombre de la Mascota</label>
+    <input type="text" id="nombreMascota" required>
+
+    <label for="responsable">Responsable</label>
+    <input type="text" id="responsable" required>
+
+    <label for="diagnostico">Diagnóstico</label>
+    <input type="text" id="diagnostico" required>
+
+    <label for="costo">Costo de Consulta ($)</label>
+    <input type="number" id="costo" required>
+
+    <label for="edad">Edad (años)</label>
+    <input type="number" id="edad" required>
+
+    <button type="button" onclick="agregarFila()">Agregar</button>
+  </form>
+
+  <br>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Mascota</th>
+        <th>Responsable</th>
+        <th>Diagnóstico</th>
+        <th>Costo</th>
+        <th>Edad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Filas agregadas aquí -->
+    </tbody>
+  </table>
+
+  <script>
+    function agregarFila() {
+      const nombreMascota = document.getElementById('nombreMascota').value;
+      const responsable = document.getElementById('responsable').value;
+      const diagnostico = document.getElementById('diagnostico').value;
+      const costo = document.getElementById('costo').value;
+      const edad = document.getElementById('edad').value;
+
+      if (!nombreMascota || !responsable || !diagnostico || !costo || !edad) {
+        alert('Por favor completa todos los campos.');
+        return;
+      }
+
+      const tabla = document.getElementById('tabla').getElementsByTagName('tbody')[0];
+      const nuevaFila = tabla.insertRow();
+
+      nuevaFila.innerHTML = `
+        <td>${nombreMascota}</td>
+        <td>${responsable}</td>
+        <td>${diagnostico}</td>
+        <td>$${parseFloat(costo).toFixed(2)}</td>
+        <td>${edad}</td>
+      `;
+
+      document.getElementById('formulario').reset();
+    }
+  </script>
+
+</body>
+</html>
