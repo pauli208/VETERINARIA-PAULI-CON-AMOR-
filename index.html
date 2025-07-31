@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Veterinaria Paulina con Amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(#ffe6f0, #fff);
-      color: #d63384;
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(#fff0f5, #fce4ec);
+      color: #c2185b;
       padding: 20px;
-      background-image: url('https://i.pinimg.com/originals/d4/0d/10/d40d1087ed1db37b73a8437b1187ed63.jpg');
+      background-image: url('https://i.pinimg.com/originals/f8/27/d9/f827d92c29ff1b86f00d21cb47468236.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
@@ -17,73 +18,89 @@
 
     h1 {
       text-align: center;
-      font-size: 2.5em;
-      color: #ff69b4;
-      text-shadow: 1px 1px #fff;
+      font-size: 3em;
+      color: #d81b60;
+      text-shadow: 2px 2px #ffffff;
+      margin-bottom: 30px;
     }
 
     form {
       background: #fff0f5;
       padding: 20px;
       border-radius: 15px;
-      box-shadow: 0 0 10px #ffc0cb;
-      max-width: 500px;
-      margin: 0 auto 20px auto;
+      box-shadow: 0 0 15px #f8bbd0;
+      max-width: 650px;
+      margin: 0 auto 30px auto;
     }
 
     label {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
+      color: #ad1457;
+      font-size: 1.2em;
     }
 
     input[type="text"],
-    input[type="number"] {
+    input[type="number"],
+    select,
+    input[type="file"] {
       width: 100%;
       padding: 8px;
       margin-bottom: 15px;
-      border: 2px solid #ffb6c1;
+      border: 2px solid #f48fb1;
       border-radius: 10px;
       background-color: #fff;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1em;
     }
 
     button {
-      background-color: #ff69b4;
+      background-color: #ec407a;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 25px;
       border-radius: 10px;
-      font-size: 1em;
+      font-size: 1.2em;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #ff1493;
+      background-color: #d81b60;
     }
 
     table {
-      width: 90%;
+      width: 95%;
       margin: 0 auto;
       border-collapse: collapse;
       background: #fff0f5;
       border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 0 10px #f8bbd0;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1em;
     }
 
     th, td {
-      border: 1px solid #ffc0cb;
+      border: 1px solid #f8bbd0;
       padding: 10px;
       text-align: center;
     }
 
     th {
-      background-color: #ffb6c1;
+      background-color: #f48fb1;
+      color: white;
+    }
+
+    img {
+      max-width: 80px;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>🐾 Paulina con Amor 🐾</h1>
+  <h1>🍓 Paulina con Amor - Veterinaria 🍓</h1>
 
   <form id="formulario">
     <label for="nombreMascota">Nombre de la Mascota</label>
@@ -95,11 +112,30 @@
     <label for="diagnostico">Diagnóstico</label>
     <input type="text" id="diagnostico" required>
 
+    <label for="tipoSangre">Tipo de Sangre</label>
+    <input type="text" id="tipoSangre" required>
+
+    <label for="raza">Raza</label>
+    <input type="text" id="raza" required>
+
+    <label for="tipoMascota">Tipo de Mascota</label>
+    <select id="tipoMascota" required>
+      <option value="">Seleccionar...</option>
+      <option value="Perro">Perro</option>
+      <option value="Gato">Gato</option>
+      <option value="Ave">Ave</option>
+      <option value="Conejo">Conejo</option>
+      <option value="Otro">Otro</option>
+    </select>
+
     <label for="costo">Costo de Consulta ($)</label>
     <input type="number" id="costo" required>
 
     <label for="edad">Edad (años)</label>
     <input type="number" id="edad" required>
+
+    <label for="foto">Foto de la Mascota</label>
+    <input type="file" id="foto" accept="image/*" required>
 
     <button type="button" onclick="agregarFila()">Agregar</button>
   </form>
@@ -109,15 +145,19 @@
   <table id="tabla">
     <thead>
       <tr>
-        <th>Mascota</th>
+        <th>Foto</th>
+        <th>Nombre</th>
         <th>Responsable</th>
         <th>Diagnóstico</th>
+        <th>Tipo Sangre</th>
+        <th>Raza</th>
+        <th>Tipo</th>
         <th>Costo</th>
         <th>Edad</th>
       </tr>
     </thead>
     <tbody>
-      <!-- Filas agregadas aquí -->
+      <!-- Filas aparecerán aquí -->
     </tbody>
   </table>
 
@@ -126,26 +166,40 @@
       const nombreMascota = document.getElementById('nombreMascota').value;
       const responsable = document.getElementById('responsable').value;
       const diagnostico = document.getElementById('diagnostico').value;
+      const tipoSangre = document.getElementById('tipoSangre').value;
+      const raza = document.getElementById('raza').value;
+      const tipoMascota = document.getElementById('tipoMascota').value;
       const costo = document.getElementById('costo').value;
       const edad = document.getElementById('edad').value;
+      const fotoInput = document.getElementById('foto');
 
-      if (!nombreMascota || !responsable || !diagnostico || !costo || !edad) {
-        alert('Por favor completa todos los campos.');
+      if (!nombreMascota || !responsable || !diagnostico || !tipoSangre || !raza || !tipoMascota || !costo || !edad || !fotoInput.files[0]) {
+        alert('Por favor, completa todos los campos y selecciona una foto.');
         return;
       }
 
-      const tabla = document.getElementById('tabla').getElementsByTagName('tbody')[0];
-      const nuevaFila = tabla.insertRow();
+      const lector = new FileReader();
+      lector.onload = function(e) {
+        const tabla = document.getElementById('tabla').getElementsByTagName('tbody')[0];
+        const fila = tabla.insertRow();
 
-      nuevaFila.innerHTML = `
-        <td>${nombreMascota}</td>
-        <td>${responsable}</td>
-        <td>${diagnostico}</td>
-        <td>$${parseFloat(costo).toFixed(2)}</td>
-        <td>${edad}</td>
-      `;
+        const celdaFoto = fila.insertCell();
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        celdaFoto.appendChild(img);
 
-      document.getElementById('formulario').reset();
+        fila.insertCell().textContent = nombreMascota;
+        fila.insertCell().textContent = responsable;
+        fila.insertCell().textContent = diagnostico;
+        fila.insertCell().textContent = tipoSangre;
+        fila.insertCell().textContent = raza;
+        fila.insertCell().textContent = tipoMascota;
+        fila.insertCell().textContent = `$${parseFloat(costo).toFixed(2)}`;
+        fila.insertCell().textContent = edad;
+
+        document.getElementById('formulario').reset();
+      };
+      lector.readAsDataURL(fotoInput.files[0]);
     }
   </script>
 
